@@ -40,14 +40,21 @@ export default new Vuex.Store({
                 info: "ค่าจ้าง",
                 type: "income",
                 amount: 200,
-                total: 200
+                
               },
               {
                 date: "20/07/2021",
                 info: "กินข้าว",
                 type: "expense",
-                amount: 100,
-                total: 100
+                amount: 70,
+                
+              },
+              {
+                date: "20/07/2021",
+                info: "เพื่อนคืนเงิน",
+                type: "income",
+                amount: 50,
+                
               },
             ],
           }
