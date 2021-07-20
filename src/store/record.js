@@ -56,6 +56,13 @@ export default new Vuex.Store({
                 amount: 50,
                 
               },
+              {
+                date: "20/07/2021",
+                info: "ซื้อน้ำ",
+                type: "expense",
+                amount: 45,
+                
+              },
             ],
           }
           commit('fetch', { res })
