@@ -53,15 +53,6 @@ export default {
     
   },
   computed: {
-  //   computeTotal() {
-  //     return this.records.map((record) => {
-  //       if(record.type === 'income')
-  //         return this.total += parseInt(record.amount)
-  //       if(record.type === 'expense')
-  //         return this.total -= parseInt(record.amount)
-  //       // console.log(this.total);
-  //     })
-  //   }
     computeTotal() {
       var total = 0
       this.records.forEach(curr => {
