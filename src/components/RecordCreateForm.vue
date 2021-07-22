@@ -16,7 +16,7 @@
           <div>
               <label for="amount">Amount : </label>
               <input type="text" v-model.number="form.amount" >
-              <p v-if="checkAmountIsNum() === false" >Your amount should be number</p>
+              <p v-if="checkAmountIsNum() === false && checkAmountValue() === true" >Your amount should be number</p>
               <p v-if="checkAmountValue() === false" >Your amount should be more than 0</p>
               
           </div>
@@ -111,7 +111,7 @@ export default {
             
         },
         checkAmountIsNum() {
-            if(Number.isInteger(this.form.amount))
+            if(!isNaN(this.form.amount))
                 return true
             else{
                 return false

@@ -19,7 +19,6 @@
           <td>{{ record.type }}</td>
           <td>{{ record.amount }}</td>
           <td>{{ totalList[index] }}</td>
-          {{totalList.length}}
         </tr>
       </tbody>
     </table>
@@ -56,10 +55,10 @@ export default {
       var total = 0
       this.records.forEach((curr) => {
         if (curr.type === "Income") {
-          total += parseInt(curr.amount);
+          total += parseFloat(curr.amount);
         }
         if (curr.type === "Expense") {
-          total -= parseInt(curr.amount);
+          total -= parseFloat(curr.amount);
         }
         this.totalList.push(total);
 
