@@ -1,7 +1,7 @@
-import Vue from "vue"
-import Vuex from "vuex"
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   // state คือ fields ใน oop
@@ -17,14 +17,14 @@ export default new Vuex.Store({
   // เอาไว้เปลี่ยนแปลงค่าใน state
   mutations: {
     fetch(state, { res }) {
-      state.data = res.data
+      state.data = res.data;
     },
     add(state, { payload }) {
-      state.data.push(payload)
+      state.data.push(payload);
     },
     edit(state, { payload }) {
-      state.data[payload.index].name = payload.name
-      state.data[payload.index].type = payload.type
+      state.data[payload.index].name = payload.name;
+      state.data[payload.index].type = payload.type;
     },
   },
 
@@ -33,48 +33,41 @@ export default new Vuex.Store({
   actions: {
     // commit เป็น keyword ไว้เรียก mutation
     fetchRecord({ commit }) {
-        let res = {
-            data: [
-              {
-                date: "20/07/2021",
-                info: "ค่าจ้าง",
-                type: "income",
-                amount: 200,
-                
-              },
-              {
-                date: "20/07/2021",
-                info: "กินข้าว",
-                type: "expense",
-                amount: 70,
-                
-              },
-              {
-                date: "20/07/2021",
-                info: "เพื่อนคืนเงิน",
-                type: "income",
-                amount: 50,
-                
-              },
-              {
-                date: "20/07/2021",
-                info: "ซื้อน้ำ",
-                type: "expense",
-                amount: 45,
-                
-              },
-            ],
-          }
-          commit('fetch', { res })
-        },
-    
+      let res = {
+        data: [
+          {
+            date: "20/07/2021",
+            info: "ค่าจ้าง",
+            type: "income",
+            amount: 200,
+          },
+          {
+            date: "20/07/2021",
+            info: "กินข้าว",
+            type: "expense",
+            amount: 70,
+          },
+          {
+            date: "20/07/2021",
+            info: "เพื่อนคืนเงิน",
+            type: "income",
+            amount: 50,
+          },
+          {
+            date: "20/07/2021",
+            info: "ซื้อน้ำ",
+            type: "expense",
+            amount: 45,
+          },
+        ],
+      };
+      commit("fetch", { res });
+    },
 
     addRecord({ commit }, payload) {
-      
-      commit("add", { payload })
-    }
+      commit("add", { payload });
+    },
+  },
 
-   }, 
-  
   modules: {},
-})
+});

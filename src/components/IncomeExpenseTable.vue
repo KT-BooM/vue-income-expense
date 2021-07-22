@@ -3,73 +3,67 @@
     <table>
       <thead>
         <tr>
-            <th>#</th>
-            <th>Date</th>
-            <th>Info</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Total</th>
+          <th>#</th>
+          <th>Date</th>
+          <th>Info</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
-          
         <tr v-for="(record, index) in records" :key="index">
-          
-          <td>{{index+1}}</td>
-          <td>{{record.date}}</td>
-          <td>{{record.info}}</td>
-          <td>{{record.type}}</td>
-          <td>{{record.amount}}</td>
-          <td>{{totalList[index]}}</td>
+          <td>{{ index + 1 }}</td>
+          <td>{{ record.date }}</td>
+          <td>{{ record.info }}</td>
+          <td>{{ record.type }}</td>
+          <td>{{ record.amount }}</td>
+          <td>{{ totalList[index] }}</td>
         </tr>
       </tbody>
     </table>
     <div class="total">
-      <h3>Remaining : {{computeTotal}}</h3>
-      
+      <h3>Remaining : {{ computeTotal }}</h3>
     </div>
   </div>
 </template>
 
 <script>
-import RecordStore from '@/store/record'
+import RecordStore from "@/store/record";
 export default {
   name: "IncomeExpenseTable",
   data() {
     return {
-      records:[],
+      records: [],
       totalList: [],
-      
-    }
+    };
   },
   created() {
-    this.fetchRecord()
+    this.fetchRecord();
   },
   methods: {
     fetchRecord() {
-      RecordStore.dispatch('fetchRecord')
-      this.records = RecordStore.getters.records
+      RecordStore.dispatch("fetchRecord");
+      this.records = RecordStore.getters.records;
     },
-    
   },
   computed: {
     computeTotal() {
-      var total = 0
-      this.records.forEach(curr => {
-        if(curr.type === 'income'){
-          total += parseInt(curr.amount)
-          this.totalList.push(total)
-          }
-        if(curr.type === 'expense'){
-          total -= parseInt(curr.amount)
-          this.totalList.push(total)
+      var total = 0;
+      this.records.forEach((curr) => {
+        if (curr.type === "income") {
+          total += parseInt(curr.amount);
+          this.totalList.push(total);
         }
-      })
+        if (curr.type === "expense") {
+          total -= parseInt(curr.amount);
+          this.totalList.push(total);
+        }
+      });
       //console.log(this.totalList);
-      return total
-    }
-  } 
-
+      return total;
+    },
+  },
 };
 </script>
 
@@ -93,5 +87,4 @@ table {
   width: 90%;
   margin: 1rem auto;
 }
-
 </style>
