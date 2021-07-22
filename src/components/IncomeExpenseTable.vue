@@ -19,6 +19,7 @@
           <td>{{ record.type }}</td>
           <td>{{ record.amount }}</td>
           <td>{{ totalList[index] }}</td>
+          {{totalList.length}}
         </tr>
       </tbody>
     </table>
@@ -29,36 +30,39 @@
 </template>
 
 <script>
-import RecordStore from "@/store/record";
+// import RecordStore from "@/store/record";
 export default {
   name: "IncomeExpenseTable",
   data() {
     return {
-      records: [],
-      totalList: [],
+      // records: [],
     };
   },
-  created() {
-    this.fetchRecord();
+  props: {
+    totalList: [],
+    records: [],
   },
-  methods: {
-    fetchRecord() {
-      RecordStore.dispatch("fetchRecord");
-      this.records = RecordStore.getters.records;
-    },
-  },
+  // created() {
+  //   this.fetchRecord();
+  // },
+  // methods: {
+  //   fetchRecord() {
+  //     RecordStore.dispatch("fetchRecord");
+  //     this.records = RecordStore.getters.records;
+  //   },
+  // },
   computed: {
     computeTotal() {
-      var total = 0;
+      var total = 0
       this.records.forEach((curr) => {
-        if (curr.type === "income") {
+        if (curr.type === "Income") {
           total += parseInt(curr.amount);
-          this.totalList.push(total);
         }
-        if (curr.type === "expense") {
+        if (curr.type === "Expense") {
           total -= parseInt(curr.amount);
-          this.totalList.push(total);
         }
+        this.totalList.push(total);
+
       });
       //console.log(this.totalList);
       return total;

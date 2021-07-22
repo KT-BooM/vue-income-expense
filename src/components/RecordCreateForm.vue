@@ -1,23 +1,23 @@
 <template>
   <div>
-      {{ setState() }}
+      
       <h3>Add {{ form.type }}</h3>
       <div class="form">
           <div>
               <label for="date">Date : </label>
               <input type="date" v-model="form.date">
-              <p v-if="isValid.date === false" >This cell is required</p>
+              <p v-if="checkDate() === false" >Date is required</p>
           </div>
           <div>
               <label for="info">Info : </label>
               <input type="text" v-model="form.info" >
-              <p v-if="isValid.info === false" >This cell is required</p>
+              <p v-if="checkInfo() === false" >This cell is required</p>
           </div>
           <div>
               <label for="amount">Amount : </label>
               <input type="text" v-model.number="form.amount" >
-              <p v-if="isValid.amount.value === false" >Your amount should be more than 0</p>
-              <p v-if="isValid.amount.isNum === false" >Your amount should be number</p>
+              <p v-if="checkAmountIsNum() === false" >Your amount should be number</p>
+              <p v-if="checkAmountValue() === false" >Your amount should be more than 0</p>
               
           </div>
       </div>
@@ -27,16 +27,16 @@
 </template>
 
 <script>
+import RecordStore from "@/store/record";
 
 export default {
     data(){
         return {
             form: {
-                date: "",
-                info: "",
-                amount: 0,
-                type: ""
-
+                date: "2021-07-22",
+                info: this.state === 1 ? "ได้เงิน..." : "จ่ายค่า...",
+                amount: 10,
+                type: this.state === 1 ? "Income" : "Expense"
             },
             isValid: {
                 date: true,
@@ -44,9 +44,9 @@ export default {
                 amount: {
                     value : true,
                     isNum : true
-                }
+                },
+                all: false
             }
-
         }
     },
     props: {
@@ -56,50 +56,65 @@ export default {
         print(something) {
             console.log(something)
         },
-        setState() {
-            if(this.state === 1)
-                this.form.type = "Income"
-            if(this.state === 2)
-                this.form.type = "Expense"
-        },
+        
         cancel() {
             this.$emit('update', 0)
         },
         add() {
-            this.checkDate()
-            this.checkInfo()
-            this.checkAmount()
-            this.print(this.form.date)
-            this.print(this.form.info)
-            this.print(this.form.type)
-            this.print(this.form.amount)
+            // this.print(this.form.date)
+            // this.print(this.form.info)
+            // this.print(this.form.type)
+            // this.print(this.form.amount)
+            // this.print(this.checkAmountValue())
+            if(this.checkAll()) {
+                let payload = {
+                    date: this.form.date,
+                    info: this.form.info,
+                    type: this.form.type,
+                    amount: this.form.amount,
+                }
+                
+                RecordStore.dispatch("addRecord", payload)
+                this.cancel()
+            }
             
+            
+        },
+        checkAll() {
+            if(this.checkDate() && this.checkInfo() 
+            && this.checkAmountValue() && this.checkAmountIsNum())
+                return true
+            else
+                return false
         },
         checkDate() {
             if(this.form.date === "")
-                this.isValid.date = false
+                return false
             else{
-                this.isValid.date = true
+                return true
             }
         },
         checkInfo() {
             if(this.form.info === "")
-                this.isValid.info = false
+                return false
             else{
-                this.isValid.info = true
+                return true
             }
         },
-        checkAmount() {
+        checkAmountValue() {
             
             if(this.form.amount <= 0)
-                this.isValid.amount.value = false
+                return false
             else{
-                this.isValid.amount.value = true
+                return true
             }
+            
+        },
+        checkAmountIsNum() {
             if(Number.isInteger(this.form.amount))
-                this.isValid.amount.isNum = true
+                return true
             else{
-                this.isValid.amount.isNum = false
+                return false
             }
         }
         

@@ -36,27 +36,27 @@ export default new Vuex.Store({
       let res = {
         data: [
           {
-            date: "20/07/2021",
+            date: "2021-07-20",
             info: "ค่าจ้าง",
-            type: "income",
+            type: "Income",
             amount: 200,
           },
           {
-            date: "20/07/2021",
+            date: "2021-07-20",
             info: "กินข้าว",
-            type: "expense",
+            type: "Expense",
             amount: 70,
           },
           {
-            date: "20/07/2021",
+            date: "2021-07-20",
             info: "เพื่อนคืนเงิน",
-            type: "income",
+            type: "Income",
             amount: 50,
           },
           {
-            date: "20/07/2021",
+            date: "2021-07-20",
             info: "ซื้อน้ำ",
-            type: "expense",
+            type: "Expense",
             amount: 45,
           },
         ],

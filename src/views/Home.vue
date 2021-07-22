@@ -7,10 +7,10 @@
       <button v-on:click="addExpense">Add Expense</button>
     </div>
     <record-create-form v-if="state !== 0" :state="state" @update="disappear" />
-    <income-expense />
-    <div id="nav">
-      <router-link to="/graph">Graph</router-link>
-    </div>
+    <income-expense  :totalList="totalList=[]" :records="records"/>
+    
+    <graph/>
+    
   </div>
 </template>
 
@@ -18,19 +18,34 @@
 // @ is an alias to /src
 import IncomeExpense from "../components/IncomeExpenseTable.vue";
 import RecordCreateForm from "../components/RecordCreateForm.vue";
+import Graph from "../components/Graph.vue";
+import RecordStore from "@/store/record";
 
 export default {
   name: "Home",
   components: {
     IncomeExpense,
     RecordCreateForm,
+    Graph,
   },
   data() {
     return {
       state: 0,
+      totalList: [],
+      records: [],
+
     };
   },
+  created() {
+    
+    this.fetchRecord();
+  },
+  
   methods: {
+    fetchRecord() {
+      RecordStore.dispatch("fetchRecord");
+      this.records = RecordStore.getters.records;
+    },
     addIncome() {
       this.state = 1;
     },
@@ -39,7 +54,16 @@ export default {
     },
     disappear(state) {
       this.state = state;
+      //this.forceRerender()
     },
+    // forceRerender() {
+    //   this.renderComponent = false;
+
+    //   this.$nextTick(() => {
+          
+    //       this.renderComponent = true;
+    //     });
+    // }
   },
 };
 </script>
