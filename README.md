@@ -1,23 +1,20 @@
 # vue-income-expense
-
+## Download project
+```
+git clone https://github.com/KT-BooM/vue-income-expense.git
+```
 ## Project setup
 ```
 yarn install
+or
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
 yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
+or
+npm run serve
 ```
 
 ### Customize configuration
