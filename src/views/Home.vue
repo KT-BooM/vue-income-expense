@@ -57,8 +57,8 @@ export default {
     this.fetchRecord();
   },
   methods: {
-    fetchRecord() {
-      RecordStore.dispatch("fetchRecord");
+    async fetchRecord() {
+      await RecordStore.dispatch("fetchRecord");
       this.records = RecordStore.getters.records;
     },
     addIncome() {

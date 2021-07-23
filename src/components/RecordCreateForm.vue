@@ -130,10 +130,10 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 300px;
+  width: 350px;
   margin: 0 auto;
   label {
-    margin-left: 2em;
+    margin-left: 3em;
   }
   .date-in {
     width: 165px;
@@ -170,7 +170,7 @@ export default {
   }
 }
 .error-msg {
-  margin: 0 0 0 2.5em;
+  margin: 0 0 0 9em;
   color: red;
   font-size: 0.8em;
 }
