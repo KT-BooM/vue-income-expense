@@ -1,8 +1,14 @@
-# vue-income-expense
+# Income-Expense
+
+Income-Expense project is created to help you record your incomes and expenses.
+
+# Installation
+
 ## Download project
 ```
 git clone https://github.com/KT-BooM/vue-income-expense.git
 ```
+
 ## Project setup
 ```
 yarn install
