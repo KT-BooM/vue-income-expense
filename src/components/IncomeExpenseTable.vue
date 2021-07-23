@@ -29,30 +29,17 @@
 </template>
 
 <script>
-// import RecordStore from "@/store/record";
 export default {
   name: "IncomeExpenseTable",
-  data() {
-    return {
-      // records: [],
-    };
-  },
+
   props: {
     totalList: [],
     records: [],
   },
-  // created() {
-  //   this.fetchRecord();
-  // },
-  // methods: {
-  //   fetchRecord() {
-  //     RecordStore.dispatch("fetchRecord");
-  //     this.records = RecordStore.getters.records;
-  //   },
-  // },
+
   computed: {
     computeTotal() {
-      var total = 0
+      var total = 0;
       this.records.forEach((curr) => {
         if (curr.type === "Income") {
           total += parseFloat(curr.amount);
@@ -61,16 +48,14 @@ export default {
           total -= parseFloat(curr.amount);
         }
         this.totalList.push(total);
-
       });
-      //console.log(this.totalList);
+
       return total;
     },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h1 {
   margin: 0;

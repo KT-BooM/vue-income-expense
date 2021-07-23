@@ -1,18 +1,33 @@
 <template>
   <div class="Home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <h1>Income and Expense</h1>
-    <div class="btn-wrap" v-if="state === 0">
-      <button v-on:click="addIncome">Add Income</button>
-      <button v-on:click="addExpense">Add Expense</button>
+    <div class="btn-wrap" v-if="state === 0 && !chartDisplay">
+      <button class="income-btn" v-on:click="addIncome">Add Income</button>
+      <button class="expense-btn" v-on:click="addExpense">Add Expense</button>
     </div>
     <div class="chart-wrap">
-      <button v-if="state === 0 && !chartDisplay" v-on:click="showChart">Chart</button>
-      <chart v-if="state === 0 && chartDisplay" :chartData="calChartData()"/>
-      <button v-if="state === 0 && chartDisplay" v-on:click="showChart">Back</button>
+      <button
+        class="chart-btn"
+        v-if="state === 0 && !chartDisplay"
+        v-on:click="showChart"
+      >
+        Chart of 2021
+      </button>
+      <chart v-if="state === 0 && chartDisplay" :chartData="calChartData()" />
+      <button
+        class="back-btn"
+        v-if="state === 0 && chartDisplay"
+        v-on:click="showChart"
+      >
+        Back
+      </button>
     </div>
     <record-create-form v-if="state !== 0" :state="state" @update="disappear" />
-    <income-expense  :totalList="totalList=[]" :records="records"/>
+    <income-expense
+      v-if="!chartDisplay"
+      :totalList="(totalList = [])"
+      :records="records"
+    />
   </div>
 </template>
 
@@ -56,25 +71,58 @@ export default {
       this.state = state;
     },
     showChart() {
-      this.chartDisplay = !this.chartDisplay
+      this.chartDisplay = !this.chartDisplay;
     },
     calChartData() {
-      var chartData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      var chartData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       // total remain in that month
-      this.records.map(record => {
-        if(record.date.slice(0, 4) === "2021"){
+      this.records.map((record) => {
+        if (record.date.slice(0, 4) === "2021") {
           // console.log(parseInt(record.date.slice(5, -3)));
-          let index = parseInt(record.date.slice(5, -3)) - 1
-          if(record.type === "Income")
-            chartData[index] += record.amount 
-          if(record.type === "Expense")
-            chartData[index] -= record.amount
+          let index = parseInt(record.date.slice(5, -3)) - 1;
+          if (record.type === "Income") chartData[index] += record.amount;
+          if (record.type === "Expense") chartData[index] -= record.amount;
         }
-      })
+      });
       return chartData;
-    }
-    
+    },
   },
 };
 </script>
-<style scoped></style>
+<style lang="scss" scoped>
+button {
+  color: white;
+  &:hover {
+    color: black;
+  }
+}
+.btn-wrap {
+  display: flex;
+  justify-content: space-evenly;
+  width: 500px;
+  margin: 1em auto;
+  .income-btn {
+    background-color: hsl(228, 79%, 48%);
+    &:hover {
+      background-color: hsl(177, 79%, 83%);
+    }
+  }
+  .expense-btn {
+    background-color: hsl(0, 75%, 57%);
+    &:hover {
+      color: yellow;
+      background-color: hsl(0, 100%, 50%);
+    }
+  }
+}
+.chart-btn,
+.back-btn {
+  background-color: hsla(93, 79%, 27%, 0.678);
+  &:hover {
+    background-color: hsla(93, 100%, 51%, 0.863);
+  }
+}
+.back-btn {
+  width: 60px;
+}
+</style>

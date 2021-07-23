@@ -118,7 +118,7 @@ export default new Vuex.Store({
             info: "ค่า netflix",
             type: "Expense",
             amount: 420,
-          },          
+          },
           {
             date: "2021-06-01",
             info: "ค่าขนม",
@@ -149,13 +149,13 @@ export default new Vuex.Store({
             type: "Expense",
             amount: 1500,
           },
-          
+
           {
             date: "2021-06-30",
             info: "ค่า netflix",
             type: "Expense",
             amount: 420,
-          }, 
+          },
           {
             date: "2021-07-01",
             info: "ค่าขนม",
@@ -186,7 +186,6 @@ export default new Vuex.Store({
             type: "Expense",
             amount: 450,
           },
-          
         ],
       };
       commit("fetch", { res });

@@ -9,6 +9,9 @@
 </template>
 
 <style lang="scss">
+body {
+  background-color: hsl(174, 9%, 95%);
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,5 +30,10 @@
       color: #42b983;
     }
   }
+}
+button {
+  border: #2c3e50 solid 2px;
+  border-radius: 4px;
+  padding: 6px;
 }
 </style>
